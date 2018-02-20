@@ -3,6 +3,14 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab0-Java.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab0-Java.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab0-Java_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab0-Java_main.iml" group="Lab0-Java" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Lab0-Java_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Lab0-Java_test.iml" group="Lab0-Java" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli.iml" group="lab0-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_main.iml" group="lab0-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_test.iml" group="lab0-cli" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv.iml" group="lab0-srv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_main.iml" group="lab0-srv" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_test.iml" group="lab0-srv" />
     </modules>
   </component>
 </project>
