@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/lab0-cli" />
+            <option value="$PROJECT_DIR$/lab0-mes" />
             <option value="$PROJECT_DIR$/lab0-srv" />
           </set>
         </option>

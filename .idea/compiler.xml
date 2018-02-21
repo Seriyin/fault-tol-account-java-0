@@ -6,6 +6,8 @@
       <module name="lab0-cli_test" target="1.8" />
       <module name="Lab0-Java_main" target="1.8" />
       <module name="Lab0-Java_test" target="1.8" />
+      <module name="lab0-mes_main" target="1.8" />
+      <module name="lab0-mes_test" target="1.8" />
       <module name="lab0-srv_main" target="1.8" />
       <module name="lab0-srv_test" target="1.8" />
     </bytecodeTargetLevel>

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.atomix.catalyst:catalyst-common:1.2.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-common/1.2.1/cac6f77eedd84c4753e32bdf34b89a3b21c44ba0/catalyst-common-1.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-common/1.2.1/538769b5821d72b26b76cce7989dd267a63ab56f/catalyst-common-1.2.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
