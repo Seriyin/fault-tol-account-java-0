@@ -1,4 +1,2 @@
 rootProject.name = 'Lab0-Java'
-include 'lab0-srv'
-include 'lab0-cli'
-
+include 'lab0-srv', 'lab0-cli', 'lab0-mes'
