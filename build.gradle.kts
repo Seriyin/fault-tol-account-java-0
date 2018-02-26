@@ -43,3 +43,15 @@ subprojects {
         kotlinOptions.jvmTarget = "1.8"
     }
 }
+
+project(":lab0-srv") {
+    dependencies {
+        compile(project(":lab0-mes"))
+    }
+}
+
+project(":lab0-cli") {
+    dependencies {
+        compile(project(":lab0-mes"))
+    }
+}

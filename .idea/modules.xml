@@ -6,14 +6,12 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli.iml" group="lab0-cli" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_main.iml" group="lab0-cli" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-cli/lab0-cli_test.iml" group="lab0-cli" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-mes.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-mes.iml" group="lab0-mes" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes.iml" group="lab0-mes" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes_main.iml" group="lab0-mes" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-mes/lab0-mes_test.iml" group="lab0-mes" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv.iml" group="lab0-srv" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_main.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_main.iml" group="lab0-srv" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_test.iml" filepath="$PROJECT_DIR$/.idea/modules/lab0-srv/lab0-srv_test.iml" group="lab0-srv" />
-      <module fileurl="file://$PROJECT_DIR$/lab0-mes/src/main/main.iml" filepath="$PROJECT_DIR$/lab0-mes/src/main/main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/lab0-mes/src/test/test.iml" filepath="$PROJECT_DIR$/lab0-mes/src/test/test.iml" />
     </modules>
   </component>
 </project>
