@@ -18,11 +18,15 @@ import java.util.concurrent.ThreadLocalRandom
 data class repVal(val movement : Int, val deny : Boolean)
 
 fun main(args : Array<String>) {
-    val me = Address("127.0.0.1", 22556)
+    val me = Address("localhost", 22556)
     val t = NettyTransport()
     val sr = Serializer()
     val tc = SingleThreadContext("cli-%d", sr)
-    registerHandler(t.client().connect(me).get())
+    tc.execute({registerHandler(t.client().connect(me).get())}).join()
+    while (readLine() == null);
+    tc.close()
+    t.close()
+    println("I'm here")
 }
 
 fun ClosedRange<Int>.random() = ThreadLocalRandom.current().nextInt(this.start, this.endInclusive)
@@ -31,21 +35,20 @@ fun registerHandler(connection: Connection?) {
     connection?.handler<Reply, CompletableFuture<Reply>>(Reply::class.java, handleReply())
 
     for(i in 0.rangeTo((0..16).random())) {
+        println("Will begin spam")
         var balances = Channel<Int>(16)
         launch {
-            val mov = (-200..200).random()
-            var accum = 0;
             var channel = Channel<repVal>(5000)
             launch {
-                for(i in 0.rangeTo((0..1000000).random())) {
+                for(j in 0.rangeTo((0..1000000).random())) {
                     val mov = (-200..200).random()
                     launch {
                         var rep = connection?.sendAndReceive<Message, Reply>(Message(1, mov))?.get()
                         if(rep?.res == true) {
-                            channel?.send(repVal(mov,false))
+                            channel.send(repVal(mov,false))
                         }
                         else{
-                            channel?.send(repVal(mov,true))
+                            channel.send(repVal(mov,true))
                         }
                     }
                 }
