@@ -37,6 +37,7 @@
     <orderEntry type="module" module-name="lab0-cli_main" />
     <orderEntry type="module" module-name="lab0-mes_main" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.21" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.3" level="project" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-local:1.2.1" level="project" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-netty:1.2.1" level="project" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-transport:1.2.1" level="project" />
