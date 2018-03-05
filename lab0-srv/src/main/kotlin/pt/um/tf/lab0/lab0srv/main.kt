@@ -11,7 +11,7 @@ import java.util.concurrent.CompletableFuture
 
 
 fun main(args : Array<String>) {
-    val me = Address("localhost", 22556)
+    val me = Address("127.0.0.1", 22556)
     val t = NettyTransport()
     val sr = Serializer()
     val tc = SingleThreadContext("srv-%d", sr)
