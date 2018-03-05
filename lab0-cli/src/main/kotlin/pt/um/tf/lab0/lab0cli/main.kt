@@ -1,79 +1,75 @@
 package pt.um.tf.lab0.lab0cli
 
 import io.atomix.catalyst.concurrent.SingleThreadContext
+import io.atomix.catalyst.concurrent.ThreadContext
 import io.atomix.catalyst.serializer.Serializer
 import io.atomix.catalyst.transport.Address
 import io.atomix.catalyst.transport.Connection
 import io.atomix.catalyst.transport.netty.NettyTransport
-import kotlinx.coroutines.experimental.channels.Channel
-import kotlinx.coroutines.experimental.channels.sumBy
-import kotlinx.coroutines.experimental.channels.toSet
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.runBlocking
 import pt.um.tf.lab0.lab0mes.Message
 import pt.um.tf.lab0.lab0mes.Reply
+import java.util.concurrent.ArrayBlockingQueue
+import java.util.concurrent.BlockingQueue
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ThreadLocalRandom
 
 data class repVal(val movement : Int, val deny : Boolean)
 
 fun main(args : Array<String>) {
-    val me = Address("localhost", 22556)
+    val me = Address("127.0.0.1", 22556)
     val t = NettyTransport()
     val sr = Serializer()
+    val r = (0..16).random()
+    val q : BlockingQueue<Int> = ArrayBlockingQueue<Int>(r+1)
+    var l : List<ThreadContext> = ArrayList<ThreadContext>(r)
+    for(i in 0.rangeTo(r)) {
+        val tc = SingleThreadContext("cli-%d", sr)
+        sr.register(Reply::class.java);
+        sr.register(Message::class.java);
+        tc.execute({runSpam(t.client().connect(me).get(), q)})
+        l += tc
+    }
     val tc = SingleThreadContext("cli-%d", sr)
-    tc.execute({registerHandler(t.client().connect(me).get())}).join()
-    while (readLine() == null);
+    sr.register(Reply::class.java);
+    sr.register(Message::class.java);
+    tc.execute({runBalance(t.client().connect(me).get(), q, r)}).join()
+    for(i in 0.rangeTo(r)) l[i].close()
     tc.close()
     t.close()
-    println("I'm here")
+    println("I'm done")
+}
+
+fun runBalance(connection: Connection?, q: BlockingQueue<Int>, r : Int) {
+    var sum = 0
+    for(i in 0.rangeTo(r)) {
+        val balance = q.take()
+        println("Balance ${i} ${balance}")
+        sum += balance
+    }
+    println("Got ${sum}, Expected ${connection?.sendAndReceive<Message, Reply>(Message(0, 0))?.get()?.balance}")
+}
+
+fun runSpam(connection: Connection?, q: BlockingQueue<Int>) {
+    println("Will begin spam")
+    var balance = 0
+    for(j in 0.rangeTo((0..1000000).random()))
+    {
+        val mov = (-200..200).random()
+        val rep = connection?.sendAndReceive<Message, Reply>(Message(1, mov))?.get()
+        if(rep?.res == true) {
+            balance += mov
+        }
+        else{
+            println("Rejected ${mov}")
+        }
+    }
+    q.add(balance)
 }
 
 fun ClosedRange<Int>.random() = ThreadLocalRandom.current().nextInt(this.start, this.endInclusive)
 
-fun registerHandler(connection: Connection?) {
-    connection?.handler<Reply, CompletableFuture<Reply>>(Reply::class.java, handleReply())
 
-    for(i in 0.rangeTo((0..16).random())) {
-        println("Will begin spam")
-        var balances = Channel<Int>(16)
-        launch {
-            var channel = Channel<repVal>(5000)
-            launch {
-                for(j in 0.rangeTo((0..1000000).random())) {
-                    val mov = (-200..200).random()
-                    launch {
-                        var rep = connection?.sendAndReceive<Message, Reply>(Message(1, mov))?.get()
-                        if(rep?.res == true) {
-                            channel.send(repVal(mov,false))
-                        }
-                        else{
-                            channel.send(repVal(mov,true))
-                        }
-                    }
-                }
-                channel.close()
-            }
-            var balance = 0
-            for(rep in channel) {
-                if(rep.deny) {
-                    balance += rep.movement
-                }
-                else {
-                    println("Rejected ${rep.movement}")
-                }
-            }
-            println("Balance ${balance}")
-            balances.send(balance)
-        }
-        balances.close()
-        println("Got : ${runBlocking{ balances.sumBy{ it} }}, expected ${connection?.sendAndReceive<Message,Reply>(Message(0, 0))?.get()?.balance}")
-    }
-}
-
-
-
-
+/*
 fun handleReply() : (Reply) -> Unit {
     return {
         when  {
@@ -82,5 +78,5 @@ fun handleReply() : (Reply) -> Unit {
         }
     }
 }
-
+*/
 
