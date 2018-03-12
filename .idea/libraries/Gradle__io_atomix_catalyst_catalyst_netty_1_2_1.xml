@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.atomix.catalyst:catalyst-netty:1.2.1">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/Could not find io.atomix.catalyst:catalyst-netty:1.2.1." />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-netty/1.2.1/db6a1bf1704c009098bb78e17e8ded88c725fe79/catalyst-netty-1.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/atomix/catalyst/catalyst-netty/1.2.1/catalyst-netty-1.2.1-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-netty/1.2.1/26cce34e4a135a105d79ba76c8bef9e8a08d7d42/catalyst-netty-1.2.1-sources.jar!/" />
     </SOURCES>
   </library>

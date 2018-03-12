@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Account {
     private int balance  = 0;
 
-    protected synchronized boolean movement(int mov)  {
+    protected boolean movement(int mov)  {
         boolean res = true;
         if (mov > 0) {
             balance += mov;

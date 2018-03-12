@@ -1,10 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: io.atomix.catalyst:catalyst-local:1.2.1">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/Could not find io.atomix.catalyst:catalyst-local:1.2.1." />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-local/1.2.1/26f61f1ffc1ef7a157e34e640ad28189d5086aa6/catalyst-local-1.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/io/atomix/catalyst/catalyst-local/1.2.1/catalyst-local-1.2.1-sources.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.atomix.catalyst/catalyst-local/1.2.1/76928b0c367b2c99c6b4faab9651fb9431b11d15/catalyst-local-1.2.1-sources.jar!/" />
     </SOURCES>
   </library>
