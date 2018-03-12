@@ -12,6 +12,8 @@ public class Message implements CatalystSerializable {
     private byte op;
     private int mov;
 
+    Message() {}
+
     public Message(byte op, int mov) {
         this.op = op;
         this.mov = mov;

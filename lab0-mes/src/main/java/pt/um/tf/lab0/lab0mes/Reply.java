@@ -13,6 +13,8 @@ public class Reply implements CatalystSerializable {
     private boolean denied;
     private int bal;
 
+    Reply() {}
+
     public Reply(byte op, boolean denied, int bal) {
         this.op = op;
         this.denied = denied;
