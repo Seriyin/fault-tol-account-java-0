@@ -1,5 +1,6 @@
 package pt.um.tf.lab0.lab0cli;
 
+import io.atomix.catalyst.concurrent.Futures;
 import io.atomix.catalyst.concurrent.SingleThreadContext;
 import io.atomix.catalyst.concurrent.ThreadContext;
 import io.atomix.catalyst.serializer.Serializer;
@@ -10,13 +11,8 @@ import io.atomix.catalyst.transport.netty.NettyTransport;
 import pt.um.tf.lab0.lab0mes.Message;
 import pt.um.tf.lab0.lab0mes.Reply;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,13 +23,19 @@ public class Main {
   private final Address adr;
   private final Transport t;
   private final int nc;
+  private int balance;
   private final BlockingQueue<Integer> q;
+  private final Spammer[] sp;
+  private BlockingQueue<Object> term;
 
   private Main() {
     adr = new Address("127.0.0.1", 22556);
     t = new NettyTransport();
-    nc = ThreadLocalRandom.current().nextInt(2, 7);
+    nc = ThreadLocalRandom.current().nextInt(9, 16);
     q = new ArrayBlockingQueue<>(nc+1);
+    balance = 0;
+    term = new ArrayBlockingQueue<>(1);
+    sp = new Spammer[nc];
   }
 
     public static void main(String args[]) {
@@ -45,77 +47,59 @@ public class Main {
     List<ThreadContext> l = IntStream.range(0, nc)
                                      .mapToObj(this::fireSpammer)
                                      .collect(Collectors.toList());
-    Serializer sr = new Serializer();
-    sr.register(Reply.class);
-    sr.register(Message.class);
-    ThreadContext tc = new SingleThreadContext("cli-%d", sr);
-    tc.execute(() -> {
-      try {
-        runBalance(t.client().connect(adr).get(), q, nc);
-      } catch (InterruptedException | ExecutionException e) {
-        e.printStackTrace();
-      }
-    }).join();
-    IntStream.range(0,nc+1).forEach(i -> l.get(i).close());
+    ThreadContext tc = runBalancer();
+    try {
+      term.take();
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    for (ThreadContext tcc : l) {
+      tcc.close();
+    }
     tc.close();
     t.close();
     System.out.println("I'm done");
   }
 
   private ThreadContext fireSpammer(int i) {
-        Serializer sr = new Serializer();
-        sr.register(Reply.class);
-        sr.register(Message.class);
-        io.atomix.catalyst.concurrent.ThreadContext tc = new SingleThreadContext("cli-%d", sr);
-        tc.execute(() -> {
-          try {
-            runSpam(t.client().connect(adr).get(), q);
-          } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-          }
-        });
-        return tc;
-    }
+    sp[i] = new Spammer(i, t, adr, q);
+    return sp[i].run();
+  }
 
-    private void runBalance(Connection connection, BlockingQueue<Integer> q , int r)
-        throws ExecutionException, InterruptedException {
-        int sum = q.stream().mapToInt(a -> {System.out.println("Balance: " + a);return a;}).sum();
-        System.out.println("Got " + sum +
-                           ", Expected " +
-                           ((Reply) connection.sendAndReceive(new Message((byte) 0, 0))
-                                              .get())
-                                              .getBalance());
-    }
+  private ThreadContext runBalancer() {
+    Serializer sr = new Serializer();
+    sr.register(Reply.class);
+    sr.register(Message.class);
+    ThreadContext tc = new SingleThreadContext("cli-%d", sr);
+    tc.execute(() -> {
+      t.client().connect(adr).thenAccept(this::runBalance);
 
-    private void runSpam(Connection connection, BlockingQueue<Integer> q) {
-        System.out.println("Will begin spam");
-        int balance = IntStream.range(0, ThreadLocalRandom.current()
-                                            .nextInt(20000,1000000))
-                               .map(a -> {
-                                 try {
-                                   return spamIter(connection);
-                                 } catch (ExecutionException | InterruptedException e) {
-                                   e.printStackTrace();
-                                   return 0;
-                                 }
-                               })
-                               .sum();
-        q.add(balance);
-    }
+    }).join();
+    return tc;
+  }
 
-    private int spamIter(Connection connection)
-        throws ExecutionException, InterruptedException {
-      int res = 0;
-      Message m = new Message((byte)1, ThreadLocalRandom.current()
-                                                        .nextInt(-200, 200));
-      Reply r = (Reply) connection.sendAndReceive(m).get();
-      if(!r.isDenied()) {
-        res = r.getBalance();
+  private void runBalance(Connection connection) {
+    for (int a = 0; a < nc; a++) {
+      try {
+        balance += q.take();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
       }
-      else {
-        System.out.println("Rejected " + m.getMov());
-      }
-      return res;
     }
+    connection.handler(Reply.class,this::consumeReply);
+    connection.send(new Message((byte) 0, 0));
+  }
+
+  private CompletableFuture<Void> consumeReply(Reply r) {
+    System.out.println("Got " + balance +
+                       ", Expected " + r.getBalance());
+    try {
+      term.put(new Object());
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return Futures.completedFuture(null);
+  }
+
 
 }
