@@ -1,3 +1,4 @@
+import com.sun.javafx.scene.CameraHelper.project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -62,5 +63,6 @@ project(":lab0-srv") {
 project(":lab0-cli") {
     dependencies {
         compile(project(":lab0-mes"))
+        compile(project(":lab0-srv"))
     }
 }

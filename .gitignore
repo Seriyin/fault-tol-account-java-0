@@ -40,3 +40,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 /.idea/dictionaries/*
+.idea/workspace.xml
+.idea/uiDesigner.xml
