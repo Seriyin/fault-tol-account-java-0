@@ -5,7 +5,7 @@ import io.atomix.catalyst.buffer.BufferOutput
 import io.atomix.catalyst.serializer.CatalystSerializable
 import io.atomix.catalyst.serializer.Serializer
 
-data class Message(var op : Int, var mov : Int) : CatalystSerializable  {
+data class Message(var op : Int = 0, var mov : Int = 0) : CatalystSerializable  {
     override fun writeObject(buffer: BufferOutput<*>?, serializer: Serializer?) {
         buffer?.writeInt(op)?.writeInt(mov);
     }
@@ -16,15 +16,16 @@ data class Message(var op : Int, var mov : Int) : CatalystSerializable  {
     }
 }
 
-data class Reply(var op : Int, var res : Boolean, var balance : Int) : CatalystSerializable {
+data class Reply(var op : Int = 0, var denied : Boolean = false, var balance : Int = 0) : CatalystSerializable {
+
     override fun readObject(buffer: BufferInput<*>?, serializer: Serializer?) {
         op = buffer!!.readInt()
-        res = buffer.readBoolean()
+        denied = buffer.readBoolean()
         balance = buffer.readInt()
     }
 
     override fun writeObject(buffer: BufferOutput<*>?, serializer: Serializer?) {
-        buffer?.writeInt(op)?.writeBoolean(res)?.writeInt(balance)
+        buffer?.writeInt(op)?.writeBoolean(denied)?.writeInt(balance)
     }
 
 }
