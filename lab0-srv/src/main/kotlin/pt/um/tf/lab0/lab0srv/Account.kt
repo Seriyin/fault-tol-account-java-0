@@ -1,9 +1,13 @@
 package pt.um.tf.lab0.lab0srv
 
-class Account {
-    var balance : Int = 0
+class Account : Bank {
+    override fun balance(): Int {
+        return balance
+    }
 
-    fun movement(mov : Int): Boolean {
+    private var balance : Int = 0
+
+    override fun movement(mov : Int): Boolean {
         var res = true
         if (mov > 0) {
             balance += mov
