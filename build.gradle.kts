@@ -2,7 +2,7 @@ import com.sun.javafx.scene.CameraHelper.project
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    var kotlin_version: String = "1.2.21"
+    var kotlin_version: String = "1.2.30"
     //  var vertx_version: String = "3.5.1"
     var catalyst_version: String = "1.2.1"
 
@@ -25,7 +25,7 @@ subprojects {
         plugin("application")
     }
 
-    var kotlin_version: String = "1.2.21"
+    var kotlin_version: String = "1.2.30"
     // var vertx_version: String = "3.5.1"
     var catalyst_version: String = "1.2.1"
 
@@ -40,7 +40,6 @@ subprojects {
         compile("io.vertx", "vertx-lang-kotlin-coroutines", vertx_version)
         compile("io.vertx", "vertx-core", vertx_version)
 */
-        compile("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "0.22.3")
         compile("io.atomix.catalyst", "catalyst-buffer", catalyst_version)
         compile("io.atomix.catalyst", "catalyst-concurrent", catalyst_version)
         compile("io.atomix.catalyst", "catalyst-local", catalyst_version)
