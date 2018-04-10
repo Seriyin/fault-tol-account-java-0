@@ -1,8 +1,7 @@
-package pt.um.tf.lab0.lab0cli
-
+import pt.um.tf.lab0.lab0cli.BankFactory
+import pt.um.tf.lab0.lab0cli.Spammer
 import java.util.concurrent.*
 import kotlin.system.exitProcess
-
 
 fun main(args : Array<String>) {
     val bf = BankFactory()
