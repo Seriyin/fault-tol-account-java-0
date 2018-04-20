@@ -39,15 +39,15 @@ public class Main {
   }
 
     public static void main(String args[]) {
-      Main m = new Main();
+      var m = new Main();
       m.run();
     }
 
   private void run() {
-    List<ThreadContext> l = IntStream.range(0, nc)
-                                     .mapToObj(this::fireSpammer)
-                                     .collect(Collectors.toList());
-    ThreadContext tc = runBalancer();
+    var l = IntStream.range(0, nc)
+                     .mapToObj(this::fireSpammer)
+                     .collect(Collectors.toList());
+    var tc = runBalancer();
     try {
       term.take();
     } catch (InterruptedException e) {
@@ -67,10 +67,10 @@ public class Main {
   }
 
   private ThreadContext runBalancer() {
-    Serializer sr = new Serializer();
+    var sr = new Serializer();
     sr.register(Reply.class);
     sr.register(Message.class);
-    ThreadContext tc = new SingleThreadContext("cli-%d", sr);
+    var tc = new SingleThreadContext("cli-%d", sr);
     tc.execute(() -> {
       t.client().connect(adr).thenAccept(this::runBalance);
 

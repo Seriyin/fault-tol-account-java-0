@@ -19,18 +19,18 @@ import java.util.function.Consumer;
 
 public class Main {
   public static void main(String args[]) throws IOException {
-    Address me = new Address("127.0.0.1", 22556);
-    Transport t = new NettyTransport();
-    Serializer sr = new Serializer();
+    var me = new Address("127.0.0.1", 22556);
+    var t = new NettyTransport();
+    var sr = new Serializer();
     sr.register(Message.class);
     sr.register(Reply.class);
-    ThreadContext tc = new SingleThreadContext("srv-%d", sr);
-    Account acc = new Account();
+    var tc = new SingleThreadContext("srv-%d", sr);
+    var acc = new Account();
     tc.execute(() -> {
       t.server().listen(me, c -> handlers(c, acc));
       System.out.println("Listening");
     }).join();
-    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    var in = new BufferedReader(new InputStreamReader(System.in));
     while (!in.readLine().equals("q")) ;
     tc.close();
     t.close();

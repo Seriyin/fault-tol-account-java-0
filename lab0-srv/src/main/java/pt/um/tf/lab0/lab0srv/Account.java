@@ -9,7 +9,7 @@ public class Account {
     private int balance  = 0;
 
     protected boolean movement(int mov)  {
-        boolean res = true;
+        var res = true;
         if (mov > 0) {
             balance += mov;
         }
