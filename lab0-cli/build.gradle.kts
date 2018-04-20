@@ -1,4 +1,4 @@
-val kotlin_version = "1.2.31"
+val kotlin_version = "1.2.40"
 val catalyst_version = "1.2.1"
 
 dependencies {

@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    val kotlin_version = "1.2.31"
+    val kotlin_version = "1.2.40"
 
     repositories {
         mavenCentral()
