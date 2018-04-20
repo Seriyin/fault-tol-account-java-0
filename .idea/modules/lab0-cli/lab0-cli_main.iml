@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module external.linked.project.id=":lab0-cli:main" external.linked.project.path="$MODULE_DIR$/../../../lab0-cli" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="pt.um.tf.lab0" external.system.module.type="sourceSet" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_10">
     <output url="file://$MODULE_DIR$/../../../lab0-cli/out/production/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../lab0-cli/src/main">
@@ -9,7 +9,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="lab0-mes_main" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-local:1.2.1" level="project" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-netty:1.2.1" level="project" />
     <orderEntry type="library" name="Gradle: io.atomix.catalyst:catalyst-transport:1.2.1" level="project" />
@@ -22,6 +21,7 @@
     <orderEntry type="library" name="Gradle: io.netty:netty-codec:4.1.5.Final" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-transport:4.1.5.Final" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-buffer:4.1.5.Final" level="project" />
+    <orderEntry type="module" module-name="lab0-mes_main" />
     <orderEntry type="library" name="Gradle: io.netty:netty-resolver:4.1.5.Final" level="project" />
     <orderEntry type="library" name="Gradle: io.netty:netty-common:4.1.5.Final" level="project" />
   </component>

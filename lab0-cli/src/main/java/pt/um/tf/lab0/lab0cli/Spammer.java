@@ -89,9 +89,9 @@ public class Spammer {
    * @return
    */
   private void spamIter(Connection connection) {
-    int res = 0;
-    Message m = new Message((byte)1, ThreadLocalRandom.current()
-                                                      .nextInt(-200, 200));
+    var res = 0;
+    var m = new Message((byte)1, ThreadLocalRandom.current()
+                                                  .nextInt(-200, 200));
     connection.send(m);
   }
 }
