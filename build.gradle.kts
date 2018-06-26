@@ -1,14 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
-    val kotlin_version = "1.2.40"
+    val kotlin_version = "1.2.50"
 
     repositories {
         mavenCentral()
-        jcenter()
     }
     dependencies {
-        classpath(kotlinModule("gradle-plugin", kotlin_version))
+        classpath(kotlin("gradle-plugin", kotlin_version))
     }
 }
 
@@ -18,8 +17,13 @@ subprojects {
 
     apply {
         plugin("kotlin")
-        plugin("application")
     }
+
+    extra["kotlin_version"] = "1.2.50"
+    extra["catalyst_version"] = "1.2.1"
+    extra.set("slf4j_version", "1.8.0-beta2")
+    extra.set("kotlinlog_version", "1.5.4")
+
 
     repositories {
         mavenCentral()
