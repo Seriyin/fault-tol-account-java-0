@@ -21,7 +21,7 @@ class BankFactory {
         sr.register(Reply::class.java)
         val tc : ThreadContext = SingleThreadContext("cli-%d", sr)
         l.add(tc)
-        return BankStub(me, t, sr, tc)
+        return BankStub(me, t, tc)
     }
 
     fun closeBanks() {
