@@ -14,7 +14,7 @@ class Spammer(val i: Int, val bf: BankFactory, val q: BlockingQueue<Int>) {
         logger.info("$i Spammer will do $rand iterations")
         (0..rand).forEach {
             val mov = (-200..200).random()
-            if (b.movement(mov)) {
+            if (!b.movement(mov)) {
                 balance += mov
             }
             else {
